@@ -2,6 +2,7 @@
 :ga-aqua-login-version: v1.0.1
 :ga-aqua-logout-version: v1.0.0
 :ga-aqua-comment-version: v0.0.1
+:organization: aqua-github-actions
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -34,20 +35,20 @@ jobs:
     steps:
     - name: Login
       id: login
-      uses: uniqueck/ga-aqua-login@{ga-aqua-login-version}
+      uses: {organization}/ga-aqua-login@{ga-aqua-login-version}
       with:
         aqua-base-url: ${{ secrets.AQUA_BASE_URL }}
         aqua-username: ${{ secrets.AQUA_USERNAME }}
         aqua-password: ${{ secrets.AQUA_PASSWORD }}
     - name: Add a comment
-      uses: uniqueck/ga-aqua-comment@{ga-aqua-comment-version}
+      uses: {organization}/ga-aqua-comment@{ga-aqua-comment-version}
       with:
         aqua-base-url: ${{ secrets.AQUA_BASE_URL }}
         aqua-token: ${{ steps.login.outputs.token }}
         defect: DF001268
         comment: new
     - name: Logout
-      uses: uniqueck/ga-aqua-logout@{ga-aqua-logout-version}
+      uses: {organization}/ga-aqua-logout@{ga-aqua-logout-version}
       with:
         aqua-base-url: ${{ secrets.AQUA_BASE_URL }}
         aqua-token: ${{ steps.login.outputs.token }}
@@ -55,7 +56,7 @@ jobs:
 
 == Action Spec:
 
-=== Enviroment variables
+=== Environment variables
 - `AQUA_BASE_URL` - URL of aqua instance. Example: `https://aqua-saas2.andagon.com/aquaWebNG`
 
 === Arguments
